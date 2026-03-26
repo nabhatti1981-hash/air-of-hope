@@ -2,24 +2,28 @@ name: Hourly Lahore AQI Scrape
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
-  workflow_dispatch: # Allows you to run it manually to test
+    - cron: '0 * * * *' 
+  workflow_dispatch: 
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Updated to v6 (supports Node 24)
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6 
 
+      # Updated to v6 (supports Node 24)
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: '3.9'
 
       - name: Install dependencies
-        run: |
-          pip install requests pandas
+        run: pip install requests pandas
 
       - name: Run Scraper
         run: python scraper.py
@@ -29,6 +33,5 @@ jobs:
           git config --global user.name "AQI-Bot"
           git config --global user.email "bot@github.com"
           git add lahore_hourly_log.csv
-          # The '|| exit 0' prevents the action from failing if there are no data changes
-          git commit -m "Update hourly AQI data" || exit 0
+          git commit -m "Update hourly AQI data: $(date)" || exit 0
           git push
