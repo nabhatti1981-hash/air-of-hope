@@ -12,7 +12,8 @@ from datetime import datetime
 
 API_TOKEN = "3b23ad55260b0b1b21eee42cb1734ca21f3a1db7"
 # Add your full list of 61 IDs here
-sensor_ids = ["A471607","A246898" "A576556", "A254464", "H11321"] 
+sensor.waqi_<lahore>_pm25
+#sensor_ids = ["A471607","A246898" "A576556", "A254464", "H11321"] 
 
 def get_current_data(sid):
     url = f"https://api.waqi.info/feed/{sid}/?token={API_TOKEN}"
